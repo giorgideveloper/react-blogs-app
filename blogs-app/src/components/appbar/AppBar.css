@@ -1,0 +1,11 @@
+.nav-link a{
+  color: #fff;
+  text-decoration: none;
+  padding-left: 0.8em;
+}
+.nav-link a:hover{
+  color: rgb(241, 179, 9);
+}
+.nav-link a:active{
+  color: rgb(241, 179, 9);
+}
