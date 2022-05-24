@@ -14,7 +14,7 @@ function GetCard() {
 	}, []);
 
 	const [photo, setPhoto] = useState('');
-	const apiEndPointTow = 'https://jsonplaceholder.typicode.com/photos';
+	const apiEndPointTow = `https://jsonplaceholder.typicode.com/photos`;
 	useEffect(() => {
 		const getPosts = async () => {
 			const { data: res } = await axios.get(apiEndPointTow);

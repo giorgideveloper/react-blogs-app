@@ -1,9 +1,17 @@
 import React from 'react';
 import { Button, Card, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import PostPage from '../../page/PostPage';
+import toast from '../../helpers/toast';
+import axios from 'axios';
 import './blogsCard.css';
-
+function deleteComment(id) {
+	axios
+		.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+		.then(res => {
+			toast('success', 'delete');
+		})
+		.catch(console.error());
+}
 function BlogsCard({ MovePost, MovePhoto }) {
 	return (
 		<div>
@@ -16,11 +24,15 @@ function BlogsCard({ MovePost, MovePhoto }) {
 								<Card style={{ width: '100%', height: 'auto' }}>
 									<Card.Img variant='top' src={MovePhoto.url} />
 									<Card.Body>
-										<Card.Title>{post.title}</Card.Title>
-										<Card.Text>{post.body}</Card.Text>
-										<Link to='post' onClick={<PostPage MovePost={MovePost} />}>
+										<Card.Title className='text-uppercase'>
+											{post.title}
+										</Card.Title>
+										<Card.Text>{post.body} </Card.Text>
+										<Link to={`post/${post.id}`}>
 											<Button variant='primary'>Go somewhere</Button>
-										</Link>
+										</Link>{' '}
+										<i className='bi bi-trash'></i>
+										<i className='bi bi-pencil-square'></i>
 									</Card.Body>
 								</Card>
 							</div>
