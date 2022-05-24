@@ -4,15 +4,20 @@ import { Link } from 'react-router-dom';
 import toast from '../../helpers/toast';
 import axios from 'axios';
 import './blogsCard.css';
-function deleteComment(id) {
-	axios
-		.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-		.then(res => {
-			toast('success', 'delete');
-		})
-		.catch(console.error());
-}
+
 function BlogsCard({ MovePost, MovePhoto }) {
+	function deleteComment(id, e) {
+		axios
+			.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+			.then(res => {
+				if (res.status === 200) {
+					toast('success', 'delete');
+				} else {
+					toast('warning', "can't delete");
+				}
+			})
+			.catch(console.error());
+	}
 	return (
 		<div>
 			<Container>
@@ -31,7 +36,10 @@ function BlogsCard({ MovePost, MovePhoto }) {
 										<Link to={`post/${post.id}`}>
 											<Button variant='primary'>Go somewhere</Button>
 										</Link>{' '}
-										<i className='bi bi-trash'></i>
+										<i
+											className='bi bi-trash'
+											onClick={e => deleteComment(post.id, e)}
+										></i>
 										<i className='bi bi-pencil-square'></i>
 									</Card.Body>
 								</Card>
